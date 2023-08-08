@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>IOC Search</title>
+    <link rel="stylesheet" >
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5fd9c08505.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #141e30, #243b55);
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: #fff;
+        }
+
+        .brandefense {
+            font-family: 'Indie Flower', cursive;
+            font-size: 72px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .search-txt {
+            border: none;
+            padding: 5px;
+            width: 340px;
+            border-radius: 25px;
+            font-size: 10px;
+            color: #333;
+            background-color: #f0f0f0;
+            box-shadow: none;
+            outline: none;
+        }
+
+        .search-btn {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 0 25px 25px 0;
+            position: relative;
+            z-index: 1;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .search-btn i {
+            font-size: 18px;
+        }
+
+        .search-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .result {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+
+        .balloon {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(200, 200, 200, 0.6);
+            border-radius: 50%;
+            animation: float 10s infinite linear;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            50% {
+                transform: translateY(-100vh) translateX(calc(100vw - 20px));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="brandefense">BRANDEFENSE</div>
+        <div class="container">
+            <form action="/search/" method="get" class="search-box">
+                <input class="search-txt" type="text" name="q" placeholder="Ara...">
+                <button type="submit" class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            {% if status == "Success" %}
+                {% if query %}
+                    <p class="result">Son arama: {{ query }}</p>
+
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        const container = document.querySelector(".container");
+
+        for (let i = 0; i < 150; i++) {
+            const balloon = document.createElement("div");
+            balloon.className = "balloon";
+            balloon.style.left = `${Math.random() * 100}vw`;
+            balloon.style.animationDuration = `${Math.random() * 5 + 5}s`;
+            balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 20%, 70%)`;
+            container.appendChild(balloon);
+        }
+    </script>
+</body>
+</html>
